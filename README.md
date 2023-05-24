@@ -14,3 +14,6 @@ In order to hack the contract we need to focus on this condition
       owner = _owner;
    }
 ```
+Both `tx.origin` and `msg.sender` are global variables
+tx.origin refers to address of the Externally Owned Account that originally sent the call (or start the transaction).
+msg.sender refers to the address that has called or initiated a function or created a transaction.
