@@ -1,7 +1,7 @@
 # ethernaut-solutions
 Solutions for the Ethernaut (Web3/Solidity based wargame)
 
-## Fallback 
+### Fallback 
 This contract has two methods when we can use in order to solve the challenge: contribute and receive.
 ```solidity 
  function contribute() public payable {
@@ -12,12 +12,18 @@ This contract has two methods when we can use in order to solve the challenge: c
     }
   }
 ```
+With <b>contribute()</b> only we need to pass this conditicion `if(contributions[msg.sender] > contributions[owner])`
+But, this function only accept values < 0.001 ether and right now after the contract has deployed `contributions[owner]) has 1000 ether, so in this case it is not posible.
+
+
 ```solidity 
 receive() external payable {
     require(msg.value > 0 && contributions[msg.sender] > 0);
     owner = msg.sender;
   }
 ```
+With <b>receive()</b> we need to pass this condition `require(msg.value > 0 && contributions[msg.sender] > 0);` For that is necesary to make a contribution > 0 and < 0.001.
+
 
 ## Telephone
 In the contract Telephone the function changeOwner is public and can be invoked fron any contrac
